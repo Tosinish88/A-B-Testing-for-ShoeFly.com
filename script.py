@@ -23,15 +23,9 @@ clicks_pivot = clicks_by_source.pivot(
   values='user_id'
 ).reset_index()
 
-
-
 clicks_pivot['percent_clicked'] = clicks_pivot[True] /(clicks_pivot[False] + clicks_pivot[True])*100
 
-#print(clicks_pivot)
-
 clicks_by_experimental_group = ad_clicks.groupby(['experimental_group', 'is_click']).user_id.count().reset_index()
-
-#print(clicks_by_experimental_group)
 
 clicks_by_experimental_group_pivot = clicks_by_experimental_group.pivot(
   columns='is_click',
@@ -39,22 +33,19 @@ clicks_by_experimental_group_pivot = clicks_by_experimental_group.pivot(
   values='user_id'
 ).reset_index()
 
-clicks_by_experimental_group_pivot['percent_clicked'] = clicks_by_experimental_group_pivot[True] /(clicks_by_experimental_group_pivot[False] + clicks_by_experimental_group_pivot[True])*100
+clicks_by_experimental_group_pivot['percent_clicked'] = clicks_by_experimental_group_pivot[True]\
+/(clicks_by_experimental_group_pivot[False] + clicks_by_experimental_group_pivot[True])*100
 
 #print(clicks_by_experimental_group_pivot)
 
 a_clicks = ad_clicks[ad_clicks.experimental_group == 'A'].reset_index()
 
-b_clicks = ad_clicks[ad_clicks.experimental_group == 'B'].reset_index()
-
-#print(a_clicks)
-#print(b_clicks)
+b_clicks = ad_clicks[ad_clicks.experimental_group == 'B'].reset_index())
 
 a_clicks_count = a_clicks.groupby('day').user_id.count().reset_index()
 
 b_clicks_count = b_clicks.groupby('day').user_id.count().reset_index()
 
-#print(type(b_clicks_count))
 
 #print(a_clicks_count)
 #print(b_clicks_count)
